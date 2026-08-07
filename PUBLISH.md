@@ -23,6 +23,32 @@ Click **Create repository**, then leave the page open.
 
 ---
 
+## Easier alternative — skip Steps 2 and 3 entirely
+
+Manual tokens are the fiddliest way to do this. GitHub CLI signs in via browser and configures git for you — no token to create, scope, store or renew:
+
+```
+brew install gh          # or the installer from cli.github.com
+gh auth login
+```
+
+Answer: **GitHub.com** → **HTTPS** → **Authenticate Git with your GitHub credentials? Yes** → **Login with a web browser**. Paste the one-time code it shows, authorize in the browser, done.
+
+Then, from this folder:
+
+```
+gh repo create bmt --public --source=. --push
+```
+
+That creates the repo, sets the remote, and pushes — replacing Steps 1, 2 and 3. Go straight to Step 4.
+
+If the repo already exists, just `git push -u origin main` instead.
+
+> Already have a stale credential cached? Erase it first or git will silently reuse it:
+> `git credential-osxkeychain erase`, then `protocol=https`, `host=github.com`, Return twice.
+
+---
+
 ## Step 2 — Generate the token
 
 Go to **https://github.com/settings/tokens?type=beta**
@@ -102,6 +128,19 @@ Then it's just `bmt` in a terminal. Run `source ~/.zshrc` once to pick it up.
 ---
 
 ## Troubleshooting
+
+**`Permission to eduardomansi/bmt.git denied` / error 403** — authentication worked, authorization didn't. Two causes, often together:
+
+1. *Git is using an old credential and never prompted you.* If you've pushed to GitHub from this Mac before, Keychain already holds a token — it authenticates fine but has no write access to `bmt`. Clear it:
+   ```
+   git credential-osxkeychain erase
+   protocol=https
+   host=github.com
+   ```
+   then Return twice on a blank line.
+2. *The token doesn't cover this repo.* Fine-grained tokens set to "Only select repositories" only cover repos that **existed when the token was created**. Make the repo first, then the token. Verify under Repository access that `bmt` is ticked, and that **Contents = Read and write** — a missing or read-only Contents permission produces exactly this 403.
+
+**No prompt for username/password at all** — same cause as (1) above: a cached Keychain credential is being used silently. Erase it and push again.
 
 **Push rejected, "updates were rejected"** — the repo wasn't empty. Either delete and recreate it without a README, or run `git pull --rebase origin main` then push again.
 
