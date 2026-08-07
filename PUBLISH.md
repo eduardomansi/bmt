@@ -125,6 +125,39 @@ alias bmt='cd ~/Documents/Claude/Scheduled/stockedup-big-money-scan/site && git 
 
 Then it's just `bmt` in a terminal. Run `source ~/.zshrc` once to pick it up.
 
+### Fully automatic — recommended (one-time, ~1 minute)
+
+The scan itself cannot push: it runs in an isolated sandbox with no access to your Keychain. Instead, a **launchd agent on your Mac watches `site/index.html` and pushes the moment the scan rewrites it.** Event-driven, so it publishes right after every run rather than on a guessed timer.
+
+Two files in the parent folder do this: `push.sh` (the git commands) and `com.eduardomansi.bmt-push.plist` (the watcher).
+
+Install once:
+
+```
+cd ~/Documents/Claude/Scheduled/stockedup-big-money-scan
+chmod +x push.sh
+cp com.eduardomansi.bmt-push.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/com.eduardomansi.bmt-push.plist
+```
+
+Test it without waiting for the next scan:
+
+```
+touch site/index.html
+sleep 5 && cat push.log
+```
+
+You should see a timestamp and either `pushed OK` or `no changes, skipping`.
+
+**Why launchd rather than cron:** it triggers on the file changing instead of at a fixed time, so it can't miss a late-finishing run, and LaunchAgents run inside your GUI session where the Keychain is unlocked — cron is flakier about that.
+
+Notes:
+- Everything is logged to `push.log`. Check there first if the site looks stale.
+- Empty runs are skipped rather than making empty commits.
+- If your token expires, `push.log` says so; run `git push` manually once to re-authenticate.
+- To disable: `launchctl unload ~/Library/LaunchAgents/com.eduardomansi.bmt-push.plist`
+- `push.sh`, `push.log` and the plist live in the **parent** folder, not `site/`, so they never get published.
+
 ---
 
 ## Troubleshooting
