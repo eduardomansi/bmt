@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#111317">
+<title>Big Money Scan</title>
+<style>
+:root { color-scheme: light; }
+* { box-sizing: border-box; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; padding: 0 0 44px;
+  background: #f6f7f8; color: #16181d;
+  font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 14px; }
+header { background: #111317; color: #fff; padding: 20px 0 18px; margin-bottom: 18px; }
+header .wrap { display: block; }
+h1 { font-size: 19px; margin: 0 0 3px; letter-spacing: -0.01em; font-weight: 650; }
+.sub { color: #a5aab4; font-size: 12.5px; }
+h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: #6b7280;
+     margin: 24px 0 9px; font-weight: 640; }
+.card { border: 1px solid #e3e5e8; border-radius: 12px; padding: 14px 15px; background: #fff; }
+.scorecard { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.stat { border: 1px solid #e3e5e8; border-radius: 11px; padding: 11px 10px; background: #fff; text-align: center; }
+.stat .n { font-size: 20px; font-weight: 660; letter-spacing: -0.02em; }
+.stat .l { font-size: 10.5px; color: #6b7280; margin-top: 3px; line-height: 1.3; }
+table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: #fff; }
+.twrap { border: 1px solid #e3e5e8; border-radius: 12px; overflow: hidden; }
+th { text-align: left; font-weight: 600; color: #6b7280; font-size: 10.5px; background: #fbfbfc;
+     text-transform: uppercase; letter-spacing: .05em; padding: 9px 10px; white-space: nowrap;
+     border-bottom: 1px solid #e3e5e8; }
+th.s { cursor: pointer; -webkit-user-select: none; user-select: none; }
+th.s[aria-sort] { color: #16181d; }
+td { padding: 10px; border-top: 1px solid #f1f2f4; vertical-align: middle; white-space: nowrap; }
+tr:first-child td { border-top: 0; }
+.tk { font-weight: 650; }
+.meta { color: #6b7280; font-size: 11px; font-weight: 400; margin-top: 2px; white-space: normal; line-height: 1.35; }
+.up { color: #077d55; } .dn { color: #b4232c; } .mut { color: #9ca3af; }
+.num { font-variant-numeric: tabular-nums; }
+.bar { position: relative; height: 6px; background: #ebedf0; border-radius: 3px; min-width: 60px; overflow: hidden; }
+.bar > i { position: absolute; inset: 0 auto 0 0; background: #077d55; border-radius: 3px; }
+.bar.neg > i { background: #b4232c; }
+.pill { display: inline-block; font-size: 10px; font-weight: 640; padding: 2px 7px;
+        border-radius: 20px; letter-spacing: .02em; vertical-align: 1px; }
+.p-hit { background: #dcf5e7; color: #06603f; }
+.p-open { background: #eef0f2; color: #52525b; }
+.p-warn { background: #fdeaea; color: #97161f; }
+.p-soon { background: #fff2d6; color: #8a5a00; }
+ul.cal { list-style: none; margin: 0; padding: 0; }
+ul.cal li { display: flex; gap: 10px; padding: 9px 0; border-top: 1px solid #f1f2f4; align-items: baseline; flex-wrap: wrap; }
+ul.cal li:first-child { border-top: 0; }
+.d { font-variant-numeric: tabular-nums; font-weight: 640; min-width: 52px; font-size: 12.5px; }
+.dd { color: #9ca3af; font-size: 11px; margin-left: auto; white-space: nowrap; }
+.rep h3 { font-size: 15.5px; margin: 0 0 9px; letter-spacing: -0.01em; }
+.rep p { margin: 0 0 10px; }
+.rep ol { margin: 0 0 10px; padding-left: 19px; }
+.rep li { margin-bottom: 5px; }
+.note { font-size: 12px; color: #55585f; background: #fbfbfc; border-left: 3px solid #d4d7db;
+        padding: 9px 12px; border-radius: 0 7px 7px 0; margin-top: 10px; }
+.foot { margin-top: 26px; font-size: 11.5px; color: #9ca3af; border-top: 1px solid #e3e5e8; padding-top: 13px; }
+@media (max-width: 560px) {
+  .hide-s { display: none; }
+  .scorecard { grid-template-columns: repeat(2, 1fr); }
+  td, th { padding-left: 8px; padding-right: 8px; }
+}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <h1>Big Money Scan</h1>
+  <div class="sub">StockedUp options-flow tracker · <span id="stamp">2026-08-07</span></div>
+</div></header>
+
+<div class="wrap">
+
+<h2>Scorecard</h2>
+<div class="scorecard">
+  <div class="stat"><div class="n">15</div><div class="l">Tracked</div></div>
+  <div class="stat"><div class="n">4</div><div class="l">Resolved</div></div>
+  <div class="stat"><div class="n">2<span class="mut" style="font-size:14px">/3</span></div><div class="l">Spreads hit</div></div>
+  <div class="stat"><div class="n">0</div><div class="l">Calls issued</div></div>
+</div>
+<div class="note"><strong>n=3 on the bucket that matters.</strong> Every rate here sits on single digits — a 2-of-3 result has a confidence interval running roughly 9%–99%. These accumulate toward significance; they don't yet support a decision. Catalyst-in-window is 2/2 vs 0/1 without — the only visible pattern, and still 3 observations.</div>
+
+<h2>Open positions <span class="mut" style="text-transform:none;letter-spacing:0;font-size:11px;font-weight:400">— prices as of <span id="pxstamp">Aug 7, 2:05 pm ET</span></span></h2>
+<div class="twrap"><table>
+  <thead><tr>
+    <th class="s" data-k="tk">Ticker</th>
+    <th class="s" data-k="px">Price</th>
+    <th class="s" data-k="mv">vs entry</th>
+    <th class="s" data-k="pg">To target</th>
+    <th class="s hide-s" data-k="dte">Expiry</th>
+    <th class="hide-s">Premium</th>
+  </tr></thead>
+  <tbody id="rows"></tbody>
+</table></div>
+
+<h2>Today's report</h2>
+<div class="card rep">
+  <h3>No call-to-action — but the strongest candidate yet</h3>
+  <p><strong>XME</strong> (SPDR S&amp;P Metals &amp; Mining ETF) — $1.47M call debit spread, long <strong>120</strong> / short <strong>140</strong>, expiring <strong>2026-10-16</strong>. Risking $1.47M to make $6.52M (4.43:1).</p>
+  <p>Best structure the tracker has recorded: real short leg, 71-day horizon, and a 39-holding ETF so there's no single-name fraud or lockup risk. The macro backdrop is real — gold ~$4,350/oz, copper at a record $13,842/t, and the July payrolls miss knocked down September Fed-hike odds.</p>
+  <p><strong>Why it wasn't called:</strong></p>
+  <ol>
+    <li><strong>Entry already ran away.</strong> Buyer's reference was $110.35; it closed +4.5% higher the next session, +14.5% over five days, RSI 64. Buying here is chasing.</li>
+    <li><strong>$140 needs ~+21%</strong> from current — a new 52-week high.</li>
+    <li><strong>Host hedged:</strong> "the ETF needs to make a fair-sized move in order for this position to be profitable."</li>
+    <li><strong>No backtest support.</strong> Three resolved spreads is an anecdote, not a hit rate.</li>
+  </ol>
+  <p class="mut" style="font-size:13px">Would reconsider on a pullback to <strong>$108–112</strong> with the metals bid intact, or a cool CPI on 08-12 with XME still under ~$118.</p>
+  <div class="note"><strong>Backfill added the first real winner.</strong> AAP's $2.7M 47.50/60 spread resolved <strong>HIT at max profit</strong> — Q1 earnings beat sent it +19.4% and on to ~$70, well through the short strike. Note its payout was only 1.31:1: the market said "probably," and was right. XME's 4.43:1 says the opposite.</div>
+</div>
+
+<h2>Catalyst calendar</h2>
+<div class="card"><ul class="cal" id="cal"></ul></div>
+
+<div class="foot">
+Prices are a snapshot taken at the last scan, not live. Data via Bigdata.com.<br>
+Informational analysis, not financial advice. Options can lose 100% of premium.
+</div>
+
+</div>
+
+<script>
+// Written by the daily scan. px = snapshot price at scan time.
+const TRADES = [
+  {tk:'TRMB', entry:55.76, px:59.10,  target:60.00, dir:1, exp:'2026-09-18', prem:'$1.20M', note:'Long 60C · no short leg', tag:'Earnings 08-12'},
+  {tk:'XME',  entry:110.35,px:115.31, target:140.00,dir:1, exp:'2026-10-16', prem:'$1.47M', note:'120/140 spread · 4.43:1', tag:'CPI 08-12'},
+  {tk:'AG',   entry:16.49, px:18.215, target:17.00, dir:1, exp:'2026-09-18', prem:'$725k',  note:'Long 17C · no short leg', tag:'HIT'},
+  {tk:'NVTS', entry:11.00, px:13.82,  target:24.00, dir:1, exp:'2027-01-15', prem:'$1.60M', note:'11/24 spread · 4.7:1', tag:''},
+  {tk:'TPG',  entry:47.91, px:49.43,  target:50.00, dir:1, exp:'2026-09-18', prem:'$1.40M', note:'Long 47.50C · no short leg', tag:''},
+  {tk:'WHR',  entry:38.04, px:43.96,  target:50.00, dir:1, exp:'2027-01-15', prem:'$990k',  note:'Long 50C · entry approximate', tag:''},
+  {tk:'CTSH', entry:55.97, px:57.92,  target:57.50, dir:1, exp:'2028-01-21', prem:'$700k',  note:'Long 57.50C · LEAPS', tag:'Strike touched'},
+  {tk:'DJT',  entry:10.38, px:10.10,  target:16.00, dir:1, exp:'2026-11-20', prem:'$180k',  note:'Long 16C · no short leg', tag:'Earnings 08-14'},
+  {tk:'TAL',  entry:12.50, px:12.295, target:13.00, dir:1, exp:'2026-10-16', prem:'$170k',  note:'Long 13C · no short leg', tag:''},
+  {tk:'M',    entry:18.00, px:25.385, target:17.00, dir:-1,exp:'2026-09-18', prem:'$2.00M', note:'Long 17 PUTS · entry approximate', tag:'Failing'}
+];
+
+const CALENDAR = [
+  {d:'2026-08-12', t:'US CPI (July) — decides the September Fed call', w:'XME'},
+  {d:'2026-08-12', t:'Trimble Q2 2026 earnings', w:'TRMB'},
+  {d:'2026-08-14', t:'Trump Media Q2 2026 earnings', w:'DJT'},
+  {d:'2026-09-16', t:'FOMC rate decision', w:'XME'},
+  {d:'2026-09-18', t:'Expiry — TRMB, AG, TPG, M', w:'4 trades'},
+  {d:'2026-10-16', t:'Expiry — XME, TAL', w:'2 trades'},
+  {d:'2026-10-27', t:'Whirlpool Q3 2026 earnings', w:'WHR'},
+  {d:'2026-11-02', t:'Navitas Q3 2026 earnings', w:'NVTS'},
+  {d:'2026-11-20', t:'Expiry — DJT', w:'DJT'}
+];
+
+const fmt = n => n == null ? '—' : n.toFixed(2);
+const pct = n => (n >= 0 ? '+' : '') + n.toFixed(1) + '%';
+const days = d => Math.round((new Date(d + 'T00:00:00') - new Date()) / 864e5);
+
+function compute(t) {
+  const mv = t.px == null ? null : ((t.px - t.entry) / t.entry) * 100 * (t.dir === -1 ? -1 : 1);
+  const span = t.target - t.entry;
+  const pg = t.px == null ? null : (span === 0 ? 100 : ((t.px - t.entry) / span) * 100);
+  return { mv, pg, dte: days(t.exp) };
+}
+
+let SORT = 'pg';
+try { SORT = localStorage.getItem('bms_sort') || 'pg'; } catch (e) {}
+
+function render() {
+  const rows = TRADES.map(t => Object.assign({}, t, compute(t)));
+  rows.sort((a, b) => {
+    if (SORT === 'tk') return a.tk.localeCompare(b.tk);
+    const av = a[SORT], bv = b[SORT];
+    if (av == null) return 1; if (bv == null) return -1;
+    return SORT === 'dte' ? av - bv : bv - av;
+  });
+
+  document.querySelectorAll('th.s').forEach(th => {
+    if (th.dataset.k === SORT) th.setAttribute('aria-sort', 'descending');
+    else th.removeAttribute('aria-sort');
+  });
+
+  document.getElementById('rows').innerHTML = rows.map(t => {
+    const cls = t.mv == null ? 'mut' : (t.mv >= 0 ? 'up' : 'dn');
+    const clamp = t.pg == null ? 0 : Math.max(0, Math.min(100, t.pg));
+    let pill = '';
+    if (t.tag === 'HIT') pill = '<span class="pill p-hit">HIT</span>';
+    else if (t.tag === 'Failing') pill = '<span class="pill p-warn">failing</span>';
+    else if (t.tag) pill = '<span class="pill ' + (/08-1[24]/.test(t.tag) ? 'p-soon' : 'p-open') + '">' + t.tag + '</span>';
+    return '<tr>'
+      + '<td><span class="tk">' + t.tk + '</span> ' + pill + '<div class="meta">' + t.note + '</div></td>'
+      + '<td class="num">' + fmt(t.px) + '<div class="meta">from ' + fmt(t.entry) + '</div></td>'
+      + '<td class="num ' + cls + '">' + (t.mv == null ? '—' : pct(t.mv)) + '</td>'
+      + '<td><div class="bar' + (t.pg != null && t.pg < 0 ? ' neg' : '') + '"><i style="width:' + clamp + '%"></i></div>'
+      + '<div class="meta">' + (t.pg == null ? '—' : Math.round(t.pg) + '% · tgt ' + fmt(t.target)) + '</div></td>'
+      + '<td class="hide-s num">' + t.exp.slice(5) + '<div class="meta">' + (t.dte < 0 ? 'expired' : t.dte + 'd') + '</div></td>'
+      + '<td class="hide-s num">' + t.prem + '</td>'
+      + '</tr>';
+  }).join('');
+}
+
+document.querySelectorAll('th.s').forEach(th => th.addEventListener('click', () => {
+  SORT = th.dataset.k;
+  try { localStorage.setItem('bms_sort', SORT); } catch (e) {}
+  render();
+}));
+
+document.getElementById('cal').innerHTML = CALENDAR.map(c => {
+  const n = days(c.d);
+  const soon = n >= 0 && n <= 7;
+  return '<li><span class="d"' + (soon ? ' style="color:#8a5a00"' : '') + '>' + c.d.slice(5) + '</span>'
+    + '<span>' + c.t + '</span>'
+    + '<span class="dd">' + (n < 0 ? 'passed' : n === 0 ? 'today' : 'in ' + n + 'd') + ' · ' + c.w + '</span></li>';
+}).join('');
+
+render();
+</script>
+</body>
+</html>
