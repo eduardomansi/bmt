@@ -108,70 +108,74 @@ First build takes a minute or two. Open it on your phone and use **Share → Add
 
 ---
 
-## After each daily scan
+## Publishing — already automatic (working as of 2026-08-07)
 
-The scheduled task rewrites `index.html` here. To publish:
+**You don't need to do anything after a scan.** A launchd agent watches `~/bmt/site/index.html` and pushes within seconds of the scheduled scan rewriting it. Event-driven, so it can't miss a run that finishes late.
 
-```
-cd ~/Documents/Claude/Scheduled/stockedup-big-money-scan/site
-git add -A && git commit -m "update $(date +%F)" && git push
-```
-
-Worth saving as a shell alias. Add to `~/.zshrc`:
+The chain:
 
 ```
-alias bmt='cd ~/Documents/Claude/Scheduled/stockedup-big-money-scan/site && git add -A && git commit -m "update $(date +%F)" && git push'
+scan writes ~/bmt/site/index.html
+   → launchd agent com.eduardomansi.bmt-push fires
+   → ~/bmt/push.sh commits and pushes
+   → GitHub Pages redeploys (~1 min)
 ```
 
-Then it's just `bmt` in a terminal. Run `source ~/.zshrc` once to pick it up.
+### ⚑ Why this folder is at ~/bmt and not under ~/Documents
 
-### Fully automatic — recommended (one-time, ~1 minute)
+`~/Documents` is **TCC-protected** on macOS. Processes spawned by launchd are denied access to it and die with `Operation not permitted` — before they can even write a log, which makes it look like nothing ran at all. Granting Full Disk Access to the *script* doesn't help either: macOS attributes the permission to the interpreter (`/bin/bash`), not the `.sh` file.
 
-The scan itself cannot push: it runs in an isolated sandbox with no access to your Keychain. Instead, a **launchd agent on your Mac watches `site/index.html` and pushes the moment the scan rewrites it.** Event-driven, so it publishes right after every run rather than on a guessed timer.
+The options were to grant FDA to `/bin/bash` — which hands full disk access to every shell script on the machine — or to move the repo somewhere unprotected. We moved it. **Do not move this repo back under `~/Documents`, `~/Desktop` or `~/Downloads`**, or auto-push silently breaks again.
 
-Two files in the parent folder do this: `push.sh` (the git commands) and `com.eduardomansi.bmt-push.plist` (the watcher).
+The scan's data files (`tracker.md`, `backtest.md`, reports) still live in `~/Documents/Claude/Scheduled/stockedup-big-money-scan/`. That's fine — only the *publishing* half needed to move.
 
-Install once:
+### Layout
 
 ```
-cd ~/Documents/Claude/Scheduled/stockedup-big-money-scan
-chmod +x push.sh
-cp com.eduardomansi.bmt-push.plist ~/Library/LaunchAgents/
+~/bmt/
+├── push.sh        ← git commands, run by launchd
+├── push.log       ← every run appends here
+├── com.eduardomansi.bmt-push.plist
+└── site/          ← the git repo; this is what GitHub serves
+    ├── index.html
+    ├── .nojekyll
+    └── PUBLISH.md
+```
+
+Script, log and plist sit **outside** `site/`, so they're never published.
+
+### If you ever need to reinstall the agent
+
+```
+chmod +x ~/bmt/push.sh
+cp ~/bmt/com.eduardomansi.bmt-push.plist ~/Library/LaunchAgents/
 launchctl bootout gui/$(id -u)/com.eduardomansi.bmt-push 2>/dev/null
 launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.eduardomansi.bmt-push.plist
 ```
 
-Use `bootstrap`, not `launchctl load` — the latter is deprecated on current macOS and fails silently.
+Use `bootstrap`, not `launchctl load` — the latter is deprecated and fails silently.
 
-**Then grant the one required permission.** `~/Documents` is TCC-protected, so a launchd agent is denied access to it and the script dies with `Operation not permitted` before it can even write its log. The plist deliberately invokes `push.sh` **directly rather than via `/bin/bash`**, so macOS attributes the permission to this single script instead of to the shell interpreter — do not change that line back.
-
-**System Settings → Privacy & Security → Full Disk Access → `+`**, then `Cmd+Shift+G` and paste:
+Test without waiting for a scan:
 
 ```
-/Users/eduardomansi/Documents/Claude/Scheduled/stockedup-big-money-scan/push.sh
+touch ~/bmt/site/index.html && sleep 8 && tail -4 ~/bmt/push.log
 ```
 
-Confirm its toggle is on, then reload the agent with the two `launchctl` lines above.
+A fresh timestamp means it fired. `no changes, skipping` is a pass — it proves the agent ran and reached git.
 
-Verify with `launchctl kickstart -p gui/$(id -u)/com.eduardomansi.bmt-push`, then check `/tmp/bmt-push.err` is empty and `push.log` has a fresh timestamp.
-
-Test it without waiting for the next scan:
+### Manual push, if you want one
 
 ```
-touch site/index.html
-sleep 5 && cat push.log
+cd ~/bmt/site && git add -A && git commit -m "update" && git push
 ```
 
-You should see a timestamp and either `pushed OK` or `no changes, skipping`.
+### Notes
 
-**Why launchd rather than cron:** it triggers on the file changing instead of at a fixed time, so it can't miss a late-finishing run, and LaunchAgents run inside your GUI session where the Keychain is unlocked — cron is flakier about that.
-
-Notes:
-- Everything is logged to `push.log`. Check there first if the site looks stale.
+- **`push.log` is the first place to look** if the site seems stale.
 - Empty runs are skipped rather than making empty commits.
-- If your token expires, `push.log` says so; run `git push` manually once to re-authenticate.
-- To disable: `launchctl unload ~/Library/LaunchAgents/com.eduardomansi.bmt-push.plist`
-- `push.sh`, `push.log` and the plist live in the **parent** folder, not `site/`, so they never get published.
+- Token expiry shows up in `push.log`; run the manual push once to re-authenticate.
+- `/tmp/bmt-push.err` captures launchd-level errors, but **it accumulates and is never cleared** — old entries linger and look alarming. `rm /tmp/bmt-push.err` before testing.
+- Disable with: `launchctl bootout gui/$(id -u)/com.eduardomansi.bmt-push`
 
 ---
 
@@ -191,6 +195,10 @@ Notes:
 **No prompt for username/password at all** — same cause as (1) above: a cached Keychain credential is being used silently. Erase it and push again.
 
 **Push rejected, "updates were rejected"** — the repo wasn't empty. Either delete and recreate it without a README, or run `git pull --rebase origin main` then push again.
+
+**`Operation not permitted` in `/tmp/bmt-push.err`** — the repo has been moved back into a TCC-protected folder (`~/Documents`, `~/Desktop`, `~/Downloads`). Move it back to `~/bmt` and reinstall the agent. See the section above; this is not fixable with a Full Disk Access grant on the script.
+
+**Site stale but `push.log` shows `pushed OK`** — GitHub Pages caches. Hard-refresh, or on iOS Safari close the tab and reopen. Check the repo's **Actions** tab for a failed deploy.
 
 **Auth suddenly fails** — the token expired. Generate a new one (Step 2), then clear the stale Keychain entry so git stops reusing it:
 
