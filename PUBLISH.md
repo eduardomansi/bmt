@@ -137,8 +137,23 @@ Install once:
 cd ~/Documents/Claude/Scheduled/stockedup-big-money-scan
 chmod +x push.sh
 cp com.eduardomansi.bmt-push.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.eduardomansi.bmt-push.plist
+launchctl bootout gui/$(id -u)/com.eduardomansi.bmt-push 2>/dev/null
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.eduardomansi.bmt-push.plist
 ```
+
+Use `bootstrap`, not `launchctl load` — the latter is deprecated on current macOS and fails silently.
+
+**Then grant the one required permission.** `~/Documents` is TCC-protected, so a launchd agent is denied access to it and the script dies with `Operation not permitted` before it can even write its log. The plist deliberately invokes `push.sh` **directly rather than via `/bin/bash`**, so macOS attributes the permission to this single script instead of to the shell interpreter — do not change that line back.
+
+**System Settings → Privacy & Security → Full Disk Access → `+`**, then `Cmd+Shift+G` and paste:
+
+```
+/Users/eduardomansi/Documents/Claude/Scheduled/stockedup-big-money-scan/push.sh
+```
+
+Confirm its toggle is on, then reload the agent with the two `launchctl` lines above.
+
+Verify with `launchctl kickstart -p gui/$(id -u)/com.eduardomansi.bmt-push`, then check `/tmp/bmt-push.err` is empty and `push.log` has a fresh timestamp.
 
 Test it without waiting for the next scan:
 
