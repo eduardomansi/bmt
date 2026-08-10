@@ -128,8 +128,8 @@ ul.cal li:first-child { border-top: 0; }
     <th class="s" data-k="px">Price</th>
     <th class="s" data-k="mv">vs entry</th>
     <th class="s" data-k="pg">To target</th>
-    <th class="s hide-s" data-k="dte">Expiry</th>
-    <th class="hide-s">Premium</th>
+    <th class="s" data-k="dte">Expiry</th>
+    <th>Premium</th>
   </tr></thead>
   <tbody id="rows"></tbody>
 </table></div>
@@ -404,8 +404,8 @@ function render() {
       + '<td class="num ' + cls + '">' + (t.mv == null ? '—' : pct(t.mv)) + '</td>'
       + '<td><div class="bar' + (t.pg != null && t.pg < 0 ? ' neg' : '') + '"><i style="width:' + clamp + '%"></i></div>'
       + '<div class="meta">' + (t.pg == null ? '—' : Math.round(t.pg) + '% · tgt ' + fmt(t.target)) + '</div></td>'
-      + '<td class="hide-s num">' + t.exp.slice(5) + '<div class="meta">' + (t.dte < 0 ? 'expired' : t.dte + 'd') + '</div></td>'
-      + '<td class="hide-s num">' + t.prem + '</td>'
+      + '<td class="num">' + t.exp.slice(5) + '<div class="meta">' + (t.dte < 0 ? 'expired' : t.dte + 'd') + '</div></td>'
+      + '<td class="num">' + t.prem + '</td>'
       + '</tr>';
   }).join('');
 }
@@ -425,6 +425,21 @@ document.getElementById('cal').innerHTML = CALENDAR.map(c => {
 }).join('');
 
 render();
+
+// ---- Tabs ----
+document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', () => {
+  document.querySelectorAll('.tab').forEach(b => b.classList.toggle('is-on', b === btn));
+  document.querySelectorAll('.panel').forEach(p =>
+    p.classList.toggle('is-on', p.id === btn.dataset.panel));
+  window.scrollTo(0, 0);
+  try { localStorage.setItem('bms_tab', btn.dataset.panel); } catch (e) {}
+}));
+
+// Restore the last tab the reader was on.
+try {
+  const saved = localStorage.getItem('bms_tab');
+  if (saved === 'p-help') document.querySelector('.tab[data-panel="p-help"]').click();
+} catch (e) {}
 </script>
 </body>
 </html>
