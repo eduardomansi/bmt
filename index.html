@@ -152,6 +152,177 @@ ul.cal li:first-child { border-top: 0; }
 <h2>Catalyst calendar</h2>
 <div class="card"><ul class="cal" id="cal"></ul></div>
 
+</div><!-- /p-dash -->
+
+<div class="panel" id="p-help">
+
+<h2>How to read this page</h2>
+<div class="card">
+  <p style="margin:0 0 10px"><strong>The one-paragraph version.</strong> A YouTube channel called StockedUp points out unusually large options bets — someone spending hundreds of thousands or millions of dollars betting a stock will move. This page writes each of those bets down, tracks what the stock actually did afterwards, and keeps score. <strong>It is a record-keeping exercise, not a tip sheet.</strong> The whole point is to find out, over time, whether following these bets would actually have made money — and so far there isn't enough evidence to say yes.</p>
+  <p style="margin:0"><strong>Why it says "No call-to-action" nearly every day.</strong> That is the normal, expected outcome. A trade only gets flagged if it clears a strict bar. Most don't. A quiet page is the system working.</p>
+</div>
+
+<div class="glnav">
+  <a href="#g-basics">Options basics</a>
+  <a href="#g-struct">Trade shapes</a>
+  <a href="#g-table">The table</a>
+  <a href="#g-badges">Badges</a>
+  <a href="#g-events">Events</a>
+  <a href="#g-score">Scorecard</a>
+</div>
+
+<h2 id="g-basics">Options basics</h2>
+<div class="card"><dl class="gl">
+
+<dt>Option</dt>
+<dd>A contract giving you the right to buy or sell a stock at a fixed price, up to a fixed date. You pay money up front for that right. If the stock doesn't move the way you needed, the contract expires and <strong>you lose everything you paid</strong> — not part of it, all of it. That is the single most important thing on this page.</dd>
+
+<dt>Call</dt>
+<dd>A bet the stock will go <strong>up</strong>. It gives you the right to buy at a set price, so it pays off if the stock rises above that price.
+<span class="eg">Most trades on this page are calls.</span></dd>
+
+<dt>Put</dt>
+<dd>A bet the stock will go <strong>down</strong>. It gives you the right to sell at a set price, so it pays off if the stock falls below it.
+<span class="eg">On this page: M, EXPE and GLW are put trades. All three are currently losing.</span></dd>
+
+<dt>Strike</dt>
+<dd>The fixed price written into the contract — the level the stock has to get past for the bet to work.
+<span class="eg">"Long $60 calls" means the buyer needs the stock above $60.</span></dd>
+
+<dt>Expiry (expiration)</dt>
+<dd>The deadline. After this date the contract is finished and worthless if it didn't work. This is what makes options unforgiving: being right eventually is the same as being wrong.</dd>
+
+<dt>Premium</dt>
+<dd>How much money the buyer spent. On this page it's the total size of the bet — <strong>$1.2M</strong> means someone put $1.2 million at risk. Bigger is not better: in this dataset, bet size has shown <em>no</em> ability to predict which trades work.</dd>
+
+<dt>In / at / out of the money</dt>
+<dd><strong>In the money</strong> — the stock is already past the strike; the contract has real value today. <strong>At the money</strong> — the stock is sitting right at the strike. <strong>Out of the money</strong> — the stock still has to travel to get there. Further out means cheaper, but less likely.</dd>
+
+</dl></div>
+
+<h2 id="g-struct">Trade shapes</h2>
+<div class="card"><dl class="gl">
+
+<dt>Long</dt>
+<dd>You bought it. "Long 60 calls" = someone bought calls with a $60 strike.</dd>
+
+<dt>Short</dt>
+<dd>You sold it. Selling an option takes in cash now in exchange for an obligation later.</dd>
+
+<dt>Leg</dt>
+<dd>One piece of a multi-part trade. A trade that buys one option and sells another has <strong>two legs</strong>.</dd>
+
+<dt>Spread (call debit spread)</dt>
+<dd>Buying one option and selling a further-away one at the same time. It costs less, but it <strong>caps</strong> the winnings at the second strike.
+<span class="eg">XME: long 120 / short 140. The buyer pays less than for the 120 calls alone, and in exchange gives up everything above $140.</span></dd>
+
+<dt>Why a "short leg" matters so much here</dt>
+<dd>It reveals the buyer's actual target. Nobody sells away their upside above $140 unless they think $140 is roughly where the move stops. <strong>A trade with a short leg tells you what the institution is really aiming at. A single-leg trade doesn't.</strong> That's why trades with no short leg get judged more sceptically on this page.</dd>
+
+<dt>Reward-to-risk (R:R)</dt>
+<dd>Most you could win versus most you could lose. <strong>4.43:1</strong> means risking $1 to make $4.43. Counter-intuitively this is a warning sign, not a selling point: a generous payout is the market's way of saying it thinks the target is unlikely.</dd>
+
+<dt>Breakeven</dt>
+<dd>Reaching the strike isn't enough — you also have to earn back what you paid. The channel never says what was paid per contract, so <strong>"the stock crossed the strike" does not prove the trade made money.</strong> This is why some wins on this page are labelled low-information.</dd>
+
+</dl></div>
+
+<h2 id="g-table">The positions table</h2>
+<div class="card"><dl class="gl">
+
+<dt>Swiping</dt>
+<dd>On a phone the table scrolls sideways — swipe left on it to reach <strong>Expiry</strong> and <strong>Premium</strong>. The ticker column stays pinned so you don't lose your place. Tapping any column heading re-sorts the table.</dd>
+
+<dt>Price</dt>
+<dd>What the stock costs now, with the price it had on the day of the video underneath ("from 55.76"). The header above the table says exactly when the price was taken, and whether it's a <strong>closing price</strong> or a <strong>live intraday</strong> one that's still moving.</dd>
+
+<dt>vs entry</dt>
+<dd>How far the stock has moved since the video, in the direction the buyer needed. <span class="up">Green is good for the trade, red is bad</span> — including for puts, where a falling stock shows green.</dd>
+
+<dt>To target</dt>
+<dd>Progress toward the buyer's goal, as a bar. 0% = no progress; 100% = target reached. The target is the short strike if there is one, otherwise the strike.</dd>
+
+<dt>Expiry</dt>
+<dd>The deadline, with days remaining underneath.</dd>
+
+<dt>Entry approximate</dt>
+<dd>The video didn't state the price, so it was reconstructed from other data. Treat those percentages as rough.</dd>
+
+</dl></div>
+
+<h2 id="g-badges">Badges and labels</h2>
+<div class="card"><dl class="gl">
+
+<dt><span class="pill p-hit">HIT</span></dt>
+<dd>The stock reached the target. For a spread that's a genuinely demanding bar. For a single-leg trade it only means the stock crossed the strike — which, as above, isn't the same as making money.</dd>
+
+<dt><span class="pill p-warn">failing</span></dt>
+<dd>The stock has moved substantially the wrong way and recovery looks unlikely.</dd>
+
+<dt><span class="pill p-soon">Earnings 08-12</span></dt>
+<dd>Amber means something is happening within about a week that could move this stock sharply.</dd>
+
+<dt><span class="pill p-open">Resolving</span></dt>
+<dd>Close enough to its deadline that it will settle one way or the other shortly.</dd>
+
+<dt>Catalyst</dt>
+<dd>A scheduled event that could decide the bet — earnings, a regulator's decision date, a product launch. <strong>The distinction that matters:</strong> an event still ahead of the trade is meaningful; news that already came out is already in the price. A bet placed <em>after</em> the news isn't insight, it's momentum.</dd>
+
+<dt>Backfill</dt>
+<dd>An older trade added later to build up history. Never a live suggestion — its moment has passed.</dd>
+
+</dl></div>
+
+<h2 id="g-events">Events you'll see mentioned</h2>
+<div class="card"><dl class="gl">
+
+<dt>Earnings</dt>
+<dd>Every three months a company publishes its results. Stocks often jump or drop hard that day, which is why so many bets are timed around one.</dd>
+
+<dt>CPI</dt>
+<dd>Consumer Price Index — the monthly US inflation reading. High inflation pushes the Federal Reserve toward raising interest rates, which tends to hurt gold and mining stocks; a soft reading tends to help them.</dd>
+
+<dt>FOMC</dt>
+<dd>The Federal Reserve committee that sets US interest rates. Its decisions move nearly everything.</dd>
+
+<dt>PDUFA</dt>
+<dd>The deadline by which the FDA must decide on a new drug. A hard, scheduled date — which is why it's a textbook catalyst.</dd>
+
+<dt>Lockup expiry</dt>
+<dd>The date insiders are finally allowed to sell their shares. More sellers can mean a lower price.</dd>
+
+<dt>Beta</dt>
+<dd>How violently a stock moves compared with the market. Beta 4 means it swings roughly four times as hard — in both directions.</dd>
+
+</dl></div>
+
+<h2 id="g-score">The scorecard, and why it's cautious</h2>
+<div class="card"><dl class="gl">
+
+<dt>Tracked / Resolved</dt>
+<dd>How many bets have been recorded, and how many have finished so you can tell whether they worked.</dd>
+
+<dt>Decisive hits</dt>
+<dd>Only the finished trades where the outcome is genuinely clear — the stock cleared the strike by so much that the cost of the contract couldn't have mattered. Marginal wins are deliberately excluded.</dd>
+
+<dt>Calls issued</dt>
+<dd>How many times this system has actually said "this one looks worth acting on." It is currently <strong>zero</strong>, and that's honest rather than timid — see below.</dd>
+
+<dt>Why the hit rate isn't trustworthy yet</dt>
+<dd>Every finished trade was entered in a short stretch of spring 2026 when almost every stock was rising sharply. In that environment, betting on things going up looks brilliant regardless of skill. Until some trades finish during a flat or falling market, the scoreboard is mostly measuring <strong>the market's luck, not the flow's insight.</strong></dd>
+
+<dt>Sample size</dt>
+<dd>With six finished trades, a 2-out-of-3 result is statistically consistent with almost anything. These numbers are being accumulated toward the point where they mean something. They aren't there yet.</dd>
+
+</dl></div>
+
+<div class="card" style="margin-top:14px;border-color:#f0d9a8;background:#fffdf7">
+  <strong style="font-size:14px">Before acting on anything here</strong>
+  <p style="margin:8px 0 0;font-size:14px">This is a research log, not advice, and it isn't written by a licensed financial adviser. Options are among the riskiest instruments available to ordinary investors and routinely go to <strong>zero</strong> — losing 100% of what you put in is a normal outcome, not a freak one. A large institution making a bet may be hedging something else entirely, or may simply be wrong; three of the big bets tracked here are currently losing badly. Never risk money you need.</p>
+</div>
+
+</div><!-- /p-help -->
+
 <div class="foot">
 Prices are a snapshot taken at the last scan, not live. Data via Bigdata.com.<br>
 Informational analysis, not financial advice. Options can lose 100% of premium.
