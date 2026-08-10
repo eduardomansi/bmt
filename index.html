@@ -26,8 +26,15 @@ h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .07em; color: #
 .stat { border: 1px solid #e3e5e8; border-radius: 11px; padding: 11px 10px; background: #fff; text-align: center; }
 .stat .n { font-size: 20px; font-weight: 660; letter-spacing: -0.02em; }
 .stat .l { font-size: 10.5px; color: #6b7280; margin-top: 3px; line-height: 1.3; }
-table { width: 100%; border-collapse: collapse; font-size: 13.5px; background: #fff; }
-.twrap { border: 1px solid #e3e5e8; border-radius: 12px; overflow: hidden; }
+table { width: 100%; min-width: 620px; border-collapse: collapse; font-size: 13.5px; background: #fff; }
+.twrap { border: 1px solid #e3e5e8; border-radius: 12px;
+         overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
+         overscroll-behavior-x: contain; }
+/* Ticker column stays pinned while the rest scrolls sideways. */
+th:first-child, td:first-child { position: sticky; left: 0; z-index: 2; background: #fff;
+     min-width: 150px; box-shadow: 1px 0 0 #eceef1; }
+th:first-child { background: #fbfbfc; z-index: 3; }
+.shint { display: none; font-size: 11.5px; color: #9ca3af; margin: 7px 2px 0; }
 th { text-align: left; font-weight: 600; color: #6b7280; font-size: 10.5px; background: #fbfbfc;
      text-transform: uppercase; letter-spacing: .05em; padding: 9px 10px; white-space: nowrap;
      border-bottom: 1px solid #e3e5e8; }
