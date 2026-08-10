@@ -55,6 +55,7 @@ tr:first-child td { border-top: 0; }
 .p-open { background: #eef0f2; color: #52525b; }
 .p-warn { background: #fdeaea; color: #97161f; }
 .p-soon { background: #fff2d6; color: #8a5a00; }
+.p-call { background: #111317; color: #fff; }
 ul.cal { list-style: none; margin: 0; padding: 0; }
 ul.cal li { display: flex; gap: 10px; padding: 9px 0; border-top: 1px solid #f1f2f4; align-items: baseline; flex-wrap: wrap; }
 ul.cal li:first-child { border-top: 0; }
@@ -114,10 +115,10 @@ ul.cal li:first-child { border-top: 0; }
 
 <h2>Scorecard</h2>
 <div class="scorecard">
-  <div class="stat"><div class="n">20</div><div class="l">Tracked</div></div>
+  <div class="stat"><div class="n">21</div><div class="l">Tracked</div></div>
   <div class="stat"><div class="n">6</div><div class="l">Resolved</div></div>
   <div class="stat"><div class="n">4<span class="mut" style="font-size:14px">/5</span></div><div class="l">Decisive hits</div></div>
-  <div class="stat"><div class="n">0</div><div class="l">Calls issued</div></div>
+  <div class="stat"><div class="n">1</div><div class="l">Calls issued</div></div>
 </div>
 <div class="note"><strong>⚠ Don't believe the 83% hit rate.</strong> All six resolved trades were entered between 2026-03-12 and 2026-04-27 — into a violent rally. Over that stretch SNOW ran +120% in three months, FCEL peaked +266%, Macy's is +110% on the year, Corning +83% YTD. <strong>"Buy calls on whatever the video mentions" would have looked great too.</strong> The backfill queue works backwards from March–May, so the resolved sample is structurally drawn from one favourable regime. Until something resolves from a flat or falling tape, this is measuring beta, not the flow. <strong>Also changed this run:</strong> catalyst-in-window fell from 3/3-vs-0/1 to <strong>3/3 vs 1/2</strong> — SNOW won decisively with no forward catalyst at all.</div>
 
@@ -396,7 +397,8 @@ function render() {
     const cls = t.mv == null ? 'mut' : (t.mv >= 0 ? 'up' : 'dn');
     const clamp = t.pg == null ? 0 : Math.max(0, Math.min(100, t.pg));
     let pill = '';
-    if (t.tag === 'HIT') pill = '<span class="pill p-hit">HIT</span>';
+    if (t.tag === 'CALLED') pill = '<span class="pill p-call">CALLED</span>';
+    else if (t.tag === 'HIT') pill = '<span class="pill p-hit">HIT</span>';
     else if (t.tag === 'Failing') pill = '<span class="pill p-warn">failing</span>';
     else if (t.tag) pill = '<span class="pill ' + (/08-1[24]/.test(t.tag) ? 'p-soon' : 'p-open') + '">' + t.tag + '</span>';
     return '<tr>'
