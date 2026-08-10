@@ -105,6 +105,13 @@ ul.cal li:first-child { border-top: 0; }
 
 <div class="wrap">
 
+<nav class="tabs">
+  <button class="tab is-on" data-panel="p-dash" type="button">Dashboard</button>
+  <button class="tab" data-panel="p-help" type="button">How to read this</button>
+</nav>
+
+<div class="panel is-on" id="p-dash">
+
 <h2>Scorecard</h2>
 <div class="scorecard">
   <div class="stat"><div class="n">20</div><div class="l">Tracked</div></div>
@@ -126,6 +133,7 @@ ul.cal li:first-child { border-top: 0; }
   </tr></thead>
   <tbody id="rows"></tbody>
 </table></div>
+<div class="shint">← swipe the table sideways for Expiry and Premium →</div>
 
 <h2>Today's report</h2>
 <div class="card rep">
