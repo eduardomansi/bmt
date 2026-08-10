@@ -68,10 +68,32 @@ ul.cal li:first-child { border-top: 0; }
         padding: 9px 12px; border-radius: 0 7px 7px 0; margin-top: 10px; }
 .foot { margin-top: 26px; font-size: 11.5px; color: #9ca3af; border-top: 1px solid #e3e5e8; padding-top: 13px; }
 @media (max-width: 560px) {
-  .hide-s { display: none; }
+  /* Columns are no longer hidden on phones — the table scrolls sideways instead,
+     so Expiry and Premium stay reachable. */
   .scorecard { grid-template-columns: repeat(2, 1fr); }
   td, th { padding-left: 8px; padding-right: 8px; }
+  .shint { display: block; }
 }
+
+/* ---- Tabs ---- */
+.tabs { display: flex; gap: 6px; margin: 0 0 4px; }
+.tab { flex: 1; appearance: none; -webkit-appearance: none; cursor: pointer;
+       font: inherit; font-size: 13px; font-weight: 600; color: #6b7280;
+       background: #eceef1; border: 0; border-radius: 10px; padding: 10px 12px;
+       min-height: 44px; letter-spacing: -0.01em; }
+.tab.is-on { background: #111317; color: #fff; }
+.panel { display: none; }
+.panel.is-on { display: block; }
+
+/* ---- Glossary ---- */
+.gl { margin: 0; }
+.gl dt { font-weight: 650; font-size: 14px; margin: 15px 0 3px; letter-spacing: -0.01em; }
+.gl dt:first-child { margin-top: 0; }
+.gl dd { margin: 0; color: #3f434b; font-size: 14px; }
+.gl .eg { display: block; color: #6b7280; font-size: 12.5px; margin-top: 3px; }
+.glnav { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 4px; }
+.glnav a { font-size: 12px; font-weight: 600; text-decoration: none; color: #16181d;
+           background: #eceef1; border-radius: 20px; padding: 6px 11px; }
 </style>
 </head>
 <body>
