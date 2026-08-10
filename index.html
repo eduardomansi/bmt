@@ -432,14 +432,19 @@ document.querySelectorAll('.tab').forEach(btn => btn.addEventListener('click', (
   document.querySelectorAll('.panel').forEach(p =>
     p.classList.toggle('is-on', p.id === btn.dataset.panel));
   window.scrollTo(0, 0);
-  try { localStorage.setItem('bms_tab', btn.dataset.panel); } catch (e) {}
 }));
 
-// Restore the last tab the reader was on.
-try {
-  const saved = localStorage.getItem('bms_tab');
-  if (saved === 'p-help') document.querySelector('.tab[data-panel="p-help"]').click();
-} catch (e) {}
+// Deliberately NOT persisted: this page is checked daily for positions, so it must
+// always open on the Dashboard. Remembering the tab meant landing on the glossary
+// every morning after reading it once.
+try { localStorage.removeItem('bms_tab'); } catch (e) {}
+
+// Let the in-page glossary links land cleanly even though the panel starts hidden.
+document.querySelectorAll('.glnav a').forEach(a => a.addEventListener('click', e => {
+  e.preventDefault();
+  const el = document.querySelector(a.getAttribute('href'));
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}));
 </script>
 </body>
 </html>
