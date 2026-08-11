@@ -347,36 +347,42 @@ Informational analysis, not financial advice. Options can lose 100% of premium.
 <script>
 // Written by the daily scan. px = snapshot price at scan time.
 const TRADES = [
-  {tk:'EQPT', entry:17.28, px:19.885, target:45.00, dir:1, exp:'2027-01-15', prem:'$9.27M', note:'Long 15C / short 45C · 5.06:1 · breakeven $19.96 · earnings 08-12', tag:'CALLED'},
-  {tk:'BTG',  entry:5.03,  px:5.055,  target:5.00,  dir:1, exp:'2026-11-20', prem:'$660k',  note:'Long 5C · no short leg · catalyst already fired', tag:'New 08-09'},
-  {tk:'TRMB', entry:55.76, px:58.85,  target:60.00, dir:1, exp:'2026-09-18', prem:'$1.20M', note:'Long 60C · no short leg', tag:'Earnings 08-12'},
-  {tk:'XME',  entry:110.35,px:117.32, target:140.00,dir:1, exp:'2026-10-16', prem:'$1.47M', note:'120/140 spread · 4.43:1', tag:'CPI 08-12'},
-  {tk:'SNOW', entry:150.00,px:335.08, target:155.00,dir:1, exp:'2026-10-16', prem:'$1.00M', note:'Long 155C · entry approximate · +116% above strike', tag:'HIT'},
-  {tk:'AG',   entry:16.49, px:18.685, target:17.00, dir:1, exp:'2026-09-18', prem:'$725k',  note:'Long 17C · no short leg', tag:'HIT'},
-  {tk:'NVTS', entry:11.00, px:13.40,  target:24.00, dir:1, exp:'2027-01-15', prem:'$1.60M', note:'11/24 spread · 4.7:1 · buyer still holding (08-09)', tag:''},
-  {tk:'TPG',  entry:47.91, px:49.025, target:50.00, dir:1, exp:'2026-09-18', prem:'$1.40M', note:'Long 47.50C · no short leg', tag:''},
-  {tk:'WHR',  entry:38.04, px:41.78,  target:50.00, dir:1, exp:'2027-01-15', prem:'$990k',  note:'Long 50C · entry approximate · bounce rolling over', tag:''},
-  {tk:'CTSH', entry:55.97, px:58.325, target:57.50, dir:1, exp:'2028-01-21', prem:'$700k',  note:'Long 57.50C · LEAPS', tag:'Strike touched'},
-  {tk:'DJT',  entry:10.38, px:9.225,  target:16.00, dir:1, exp:'2026-11-20', prem:'$180k',  note:'Long 16C · no short leg', tag:'Earnings 08-14'},
-  {tk:'TAL',  entry:12.50, px:12.495, target:13.00, dir:1, exp:'2026-10-16', prem:'$170k',  note:'Long 13C · no short leg', tag:''},
-  {tk:'GLW',  entry:150.00,px:160.21, target:145.00,dir:-1,exp:'2026-09-18', prem:'$3.95M', note:'Long 145 PUTS · entry approximate · resolves in 39d', tag:'Resolving'},
-  {tk:'M',    entry:18.00, px:25.50,  target:17.00, dir:-1,exp:'2026-09-18', prem:'$2.00M', note:'Long 17 PUTS · entry approximate', tag:'Failing'},
-  {tk:'EXPE', entry:216.00,px:308.80, target:230.00,dir:-1,exp:'2027-01-15', prem:'$4.68M', note:'Long 230 PUTS · 1.18:1 · expiry NOT stated by host, 01-15 assumed', tag:'Failing'}
+  {tk:'EQPT', entry:17.28, px:19.75,  target:45.00, dir:1, exp:'2027-01-15', prem:'$9.27M', note:'Long 15C / short 45C · 5.06:1 · closed BELOW its $19.96 breakeven · earnings 08-12', tag:'CALLED'},
+  {tk:'ZTS',  entry:74.86, px:74.86,  target:90.00, dir:1, exp:'2027-03-19', prem:'$890k',  note:'Long 90C · no short leg · no forward catalyst · guidance cut twice in 2026', tag:'New 08-10'},
+  {tk:'BTG',  entry:5.03,  px:5.06,   target:5.00,  dir:1, exp:'2026-11-20', prem:'$660k',  note:'Long 5C · no short leg · catalyst already fired', tag:''},
+  {tk:'TRMB', entry:55.76, px:58.44,  target:60.00, dir:1, exp:'2026-09-18', prem:'$1.20M', note:'Long 60C · no short leg · has never printed $60', tag:'Earnings 08-12'},
+  {tk:'XME',  entry:110.35,px:117.54, target:140.00,dir:1, exp:'2026-10-16', prem:'$1.47M', note:'120/140 spread · 4.43:1 · RSI 66 · NAV premium +1.58%', tag:'CPI 08-12'},
+  {tk:'SNOW', entry:150.00,px:334.70, target:155.00,dir:1, exp:'2026-10-16', prem:'$1.00M', note:'Long 155C · entry approximate · +116% above strike', tag:'HIT'},
+  {tk:'AG',   entry:16.49, px:18.85,  target:17.00, dir:1, exp:'2026-09-18', prem:'$725k',  note:'Long 17C · no short leg', tag:'HIT'},
+  {tk:'NVTS', entry:11.00, px:13.17,  target:24.00, dir:1, exp:'2027-01-15', prem:'$1.60M', note:'11/24 spread · 4.7:1 · buyer still holding (08-09)', tag:''},
+  {tk:'TPG',  entry:47.91, px:49.40,  target:50.00, dir:1, exp:'2026-09-18', prem:'$1.40M', note:'Long 47.50C · no short leg · pinned under its 200-day', tag:''},
+  {tk:'WHR',  entry:38.04, px:42.17,  target:50.00, dir:1, exp:'2027-01-15', prem:'$990k',  note:'Long 50C · entry approximate · bounce rolling over', tag:''},
+  {tk:'PYPL', entry:49.00, px:59.07,  target:62.50, dir:1, exp:'2028-01-21', prem:'$1.70M', note:'Long 62.50C · entry approximate · LEAPS to 2028 · low information', tag:'New backfill'},
+  {tk:'CTSH', entry:55.97, px:58.31,  target:57.50, dir:1, exp:'2028-01-21', prem:'$700k',  note:'Long 57.50C · LEAPS', tag:'Strike touched'},
+  {tk:'TAL',  entry:12.50, px:12.50,  target:13.00, dir:1, exp:'2026-10-16', prem:'$170k',  note:'Long 13C · no short leg · exactly flat since entry', tag:''},
+  {tk:'DJT',  entry:10.38, px:9.39,   target:16.00, dir:1, exp:'2026-11-20', prem:'$180k',  note:'Long 16C · no short leg · needs +70%', tag:'Earnings 08-14'},
+  {tk:'KRMN', entry:86.00, px:62.16,  target:95.00, dir:1, exp:'2026-12-18', prem:'$415k',  note:'Long 95C · entry approximate · smallest premium in the file · SpaceX-hype thesis', tag:'Failing'},
+  {tk:'GLW',  entry:150.00,px:157.74, target:145.00,dir:-1,exp:'2026-09-18', prem:'$3.95M', note:'Long 145 PUTS · entry approximate · strike now 8% away · resolves in 39d', tag:'Resolving'},
+  {tk:'M',    entry:18.00, px:24.90,  target:17.00, dir:-1,exp:'2026-09-18', prem:'$2.00M', note:'Long 17 PUTS · entry approximate', tag:'Failing'},
+  {tk:'EXPE', entry:216.00,px:314.01, target:230.00,dir:-1,exp:'2027-01-15', prem:'$4.68M', note:'Long 230 PUTS · 1.18:1 · expiry NOT stated by host, 01-15 assumed', tag:'Failing'}
 ];
 
 const CALENDAR = [
-  {d:'2026-08-12', t:'US CPI (July) — decides the September Fed call', w:'XME, BTG'},
-  {d:'2026-08-12', t:'EquipmentShare Q2 2026 earnings (after close)', w:'EQPT'},
+  {d:'2026-08-12', t:'US CPI (July) — decides the September Fed call', w:'XME, BTG, AG'},
+  {d:'2026-08-12', t:'EquipmentShare Q2 2026 earnings (after close)', w:'EQPT — the flagged trade'},
   {d:'2026-08-12', t:'Trimble Q2 2026 earnings', w:'TRMB'},
   {d:'2026-08-14', t:'Trump Media Q2 2026 earnings', w:'DJT'},
   {d:'2026-09-16', t:'FOMC rate decision', w:'XME, BTG'},
-  {d:'2026-09-18', t:'Expiry — TRMB, AG, TPG, M, GLW', w:'5 trades'},
+  {d:'2026-09-18', t:'Expiry — TRMB, AG, TPG, M, GLW', w:'resolved sample 6 → 11'},
   {d:'2026-10-16', t:'Expiry — XME, TAL, SNOW', w:'3 trades'},
   {d:'2026-10-27', t:'Whirlpool Q3 2026 earnings', w:'WHR'},
   {d:'2026-11-02', t:'Navitas Q3 2026 earnings', w:'NVTS'},
+  {d:'2026-11-03', t:'Zoetis Q3 2026 earnings', w:'ZTS'},
   {d:'2026-11-05', t:'B2Gold Q3 2026 earnings', w:'BTG'},
   {d:'2026-11-05', t:'Expedia Q3 2026 earnings', w:'EXPE'},
-  {d:'2026-11-20', t:'Expiry — DJT, BTG', w:'2 trades'}
+  {d:'2026-11-20', t:'Expiry — DJT, BTG', w:'2 trades'},
+  {d:'2026-12-18', t:'Expiry — KRMN', w:'1 trade'},
+  {d:'2027-03-19', t:'Expiry — ZTS', w:'1 trade'}
 ];
 
 const fmt = n => n == null ? '—' : n.toFixed(2);
