@@ -364,43 +364,45 @@ Informational analysis, not financial advice. Options can lose 100% of premium.
 <script>
 // Written by the daily scan. px = snapshot price at scan time.
 const TRADES = [
-  {tk:'XLI',  entry:185.70,px:185.70, target:210.00,dir:1, exp:'2026-11-20', prem:'$2.49M', note:'195/210 spread · 3.29:1 · 83-stock industrials fund · needs +13% from 1.3% below its record high', tag:'New 08-11'},
-  {tk:'EQPT', entry:17.28, px:19.57,  target:45.00, dir:1, exp:'2027-01-15', prem:'$9.27M', note:'Long 15C / short 45C · 5.06:1 · 2nd close BELOW its $19.96 breakeven · RESULTS 08-12 after close', tag:'CALLED'},
-  {tk:'ZTS',  entry:74.86, px:75.35,  target:90.00, dir:1, exp:'2027-03-19', prem:'$890k',  note:'Long 90C · no short leg · no forward catalyst · trading volume halved since the video', tag:''},
-  {tk:'BTG',  entry:5.03,  px:5.07,   target:5.00,  dir:1, exp:'2026-11-20', prem:'$660k',  note:'Long 5C · no short leg · catalyst already fired · volume halved, move stalling', tag:''},
-  {tk:'TRMB', entry:55.76, px:57.98,  target:60.00, dir:1, exp:'2026-09-18', prem:'$1.20M', note:'Long 60C · no short leg · 2nd down day · has never printed $60', tag:'Earnings 08-12'},
-  {tk:'XME',  entry:110.35,px:117.83, target:140.00,dir:1, exp:'2026-10-16', prem:'$1.47M', note:'120/140 spread · 4.43:1 · fund markup gone (+0.23% vs +4.85% Friday)', tag:'CPI 08-12'},
-  {tk:'SNOW', entry:150.00,px:334.14, target:155.00,dir:1, exp:'2026-10-16', prem:'$1.00M', note:'Long 155C · entry approximate · +116% above strike', tag:'HIT'},
-  {tk:'AG',   entry:16.49, px:18.96,  target:17.00, dir:1, exp:'2026-09-18', prem:'$725k',  note:'Long 17C · no short leg', tag:'HIT'},
-  {tk:'NVTS', entry:11.00, px:13.60,  target:24.00, dir:1, exp:'2027-01-15', prem:'$1.60M', note:'11/24 spread · 4.7:1 · best 5-day move in the book (+14.5%)', tag:''},
-  {tk:'TPG',  entry:47.91, px:50.60,  target:50.00, dir:1, exp:'2026-09-18', prem:'$1.40M', note:'Long 47.50C · no short leg · BROKE ABOVE $50, the level the host named', tag:''},
-  {tk:'WHR',  entry:38.04, px:43.59,  target:50.00, dir:1, exp:'2027-01-15', prem:'$990k',  note:'Long 50C · entry approximate · sharp bounce, but 5-day still −3.7%', tag:''},
-  {tk:'PYPL', entry:49.00, px:59.00,  target:62.50, dir:1, exp:'2028-01-21', prem:'$1.70M', note:'Long 62.50C · entry approximate · runs to 2028 · tells us little', tag:''},
-  {tk:'CTSH', entry:55.97, px:58.60,  target:57.50, dir:1, exp:'2028-01-21', prem:'$700k',  note:'Long 57.50C · runs to 2028', tag:'Strike touched'},
-  {tk:'TAL',  entry:12.50, px:12.16,  target:13.00, dir:1, exp:'2026-10-16', prem:'$170k',  note:'Long 13C · no short leg · flat line broke down, strike 6.9% away', tag:''},
-  {tk:'DJT',  entry:10.38, px:8.91,   target:16.00, dir:1, exp:'2026-11-20', prem:'$180k',  note:'Long 16C · no short leg · −13% in two days · needs +80%', tag:'Earnings 08-14'},
-  {tk:'KRMN', entry:86.00, px:61.94,  target:95.00, dir:1, exp:'2026-12-18', prem:'$415k',  note:'Long 95C · entry approximate · smallest bet in the file · SpaceX-hype thesis', tag:'Failing'},
-  {tk:'GLW',  entry:150.00,px:159.20, target:145.00,dir:-1,exp:'2026-09-18', prem:'$3.95M', note:'Long 145 PUTS · entry approximate · strike 8.9% away · settles in 38d', tag:'Resolving'},
-  {tk:'M',    entry:18.00, px:24.52,  target:17.00, dir:-1,exp:'2026-09-18', prem:'$2.00M', note:'Long 17 PUTS · entry approximate', tag:'Failing'},
-  {tk:'EXPE', entry:216.00,px:321.07, target:230.00,dir:-1,exp:'2027-01-15', prem:'$4.68M', note:'Long 230 PUTS · 1.18:1 · new worst mark · expiry NOT stated by host, 01-15 assumed', tag:'Failing'}
+  {tk:'MRNA', entry:63.67, px:63.67,  target:75.00, dir:1, exp:'2027-03-19', prem:'$1.25M', note:'Long 75C · no short leg · FDA approved its flu vaccine on 05 Aug, a week BEFORE the bet · 41% above analysts’ middle estimate of $45', tag:'New 08-12'},
+  {tk:'KTOS', entry:65.00, px:63.82,  target:85.00, dir:1, exp:'2026-08-21', prem:'$1.68M', note:'Long 85C · far out of the money · entry approximate · needs +33% in 9 days · same shape as FuelCell, and about to fail', tag:'Resolving'},
+  {tk:'EQPT', entry:17.28, px:20.68,  target:45.00, dir:1, exp:'2027-01-15', prem:'$9.27M', note:'Long 15C / short 45C · 5.06:1 · ✅ Q2 beat: rental revenue +39% · now ABOVE its $19.96 breakeven · target $23.25', tag:'CALLED'},
+  {tk:'XLI',  entry:185.70,px:185.88, target:210.00,dir:1, exp:'2026-11-20', prem:'$2.49M', note:'195/210 spread · 3.29:1 · 83-stock industrials fund · inflation data came in as expected and it moved +0.10%', tag:''},
+  {tk:'ZTS',  entry:74.86, px:73.55,  target:90.00, dir:1, exp:'2027-03-19', prem:'$890k',  note:'Long 90C · no short leg · no forward catalyst · now CHEAPER than the buyer paid', tag:''},
+  {tk:'BTG',  entry:5.03,  px:5.21,   target:5.00,  dir:1, exp:'2026-11-20', prem:'$660k',  note:'Long 5C · no short leg · catalyst already fired · +19.8% over five days', tag:''},
+  {tk:'TRMB', entry:55.76, px:56.35,  target:60.00, dir:1, exp:'2026-09-18', prem:'$1.20M', note:'Long 60C · ⚠ beat results AND raised guidance, then FELL 2.8% · 3rd down day · has never touched $60', tag:'Catalyst failed'},
+  {tk:'XME',  entry:110.35,px:116.79, target:140.00,dir:1, exp:'2026-10-16', prem:'$1.47M', note:'120/140 spread · 4.43:1 · now trades slightly BELOW the fund’s true value (−0.83%)', tag:''},
+  {tk:'SNOW', entry:150.00,px:332.26, target:155.00,dir:1, exp:'2026-10-16', prem:'$1.00M', note:'Long 155C · entry approximate · +114% above strike', tag:'HIT'},
+  {tk:'AG',   entry:16.49, px:19.16,  target:17.00, dir:1, exp:'2026-09-18', prem:'$725k',  note:'Long 17C · no short leg · above both its moving averages', tag:'HIT'},
+  {tk:'NVTS', entry:11.00, px:13.93,  target:24.00, dir:1, exp:'2027-01-15', prem:'$1.60M', note:'11/24 spread · 4.7:1 · best-performing open spread', tag:''},
+  {tk:'TPG',  entry:47.91, px:50.88,  target:50.00, dir:1, exp:'2026-09-18', prem:'$1.40M', note:'Long 47.50C · no short leg · holding above $50, the level the host named', tag:''},
+  {tk:'WHR',  entry:38.04, px:42.85,  target:50.00, dir:1, exp:'2027-01-15', prem:'$990k',  note:'Long 50C · entry approximate · −40.6% this year · long-term average is 41% overhead', tag:''},
+  {tk:'PYPL', entry:49.00, px:59.20,  target:62.50, dir:1, exp:'2028-01-21', prem:'$1.70M', note:'Long 62.50C · entry approximate · runs to 2028 · tells us little', tag:''},
+  {tk:'CTSH', entry:55.97, px:58.20,  target:57.50, dir:1, exp:'2028-01-21', prem:'$700k',  note:'Long 57.50C · runs to 2028', tag:'Strike touched'},
+  {tk:'TAL',  entry:12.50, px:11.87,  target:13.00, dir:1, exp:'2026-10-16', prem:'$170k',  note:'Long 13C · no short leg · second down day, strike now 9.5% away', tag:''},
+  {tk:'DJT',  entry:10.38, px:8.27,   target:16.00, dir:1, exp:'2026-11-20', prem:'$180k',  note:'Long 16C · no short leg · −20% in three days · needs +94%', tag:'Earnings 08-14'},
+  {tk:'KRMN', entry:86.00, px:61.91,  target:95.00, dir:1, exp:'2026-12-18', prem:'$415k',  note:'Long 95C · entry approximate · smallest bet in the file · SpaceX-hype thesis', tag:'Failing'},
+  {tk:'GLW',  entry:150.00,px:167.47, target:145.00,dir:-1,exp:'2026-09-18', prem:'$3.95M', note:'Long 145 PUTS · entry approximate · ⚠ +5.2% today pushed the target to 13.4% away · 37 days left', tag:'Failing'},
+  {tk:'M',    entry:18.00, px:23.79,  target:17.00, dir:-1,exp:'2026-09-18', prem:'$2.00M', note:'Long 17 PUTS · entry approximate · target 28.5% away', tag:'Failing'},
+  {tk:'EXPE', entry:216.00,px:325.57, target:230.00,dir:-1,exp:'2027-01-15', prem:'$4.68M', note:'Long 230 PUTS · 1.18:1 · new worst mark, and the worst row on the page · expiry NOT stated by host', tag:'Failing'}
 ];
 
 const CALENDAR = [
-  {d:'2026-08-12', t:'US inflation data (July CPI), 8:30am ET — feeds the September Fed call', w:'XLI, XME, BTG, AG'},
-  {d:'2026-08-12', t:'EquipmentShare Q2 2026 earnings (after close)', w:'EQPT — the flagged trade'},
-  {d:'2026-08-12', t:'Trimble Q2 2026 earnings', w:'TRMB'},
-  {d:'2026-08-14', t:'Trump Media Q2 2026 earnings', w:'DJT'},
+  {d:'2026-08-13', t:'EquipmentShare Q2 earnings call, 7:30am CT', w:'EQPT — the flagged trade'},
+  {d:'2026-08-14', t:'Trump Media Q2 2026 earnings', w:'DJT — down 20% into it'},
+  {d:'2026-08-21', t:'Expiry — KTOS', w:'finished sample 6 → 7'},
   {d:'2026-09-16', t:'FOMC rate decision', w:'XLI, XME, BTG'},
-  {d:'2026-09-18', t:'Expiry — TRMB, AG, TPG, M, GLW', w:'resolved sample 6 → 11'},
+  {d:'2026-09-18', t:'Expiry — TRMB, AG, TPG, M, GLW', w:'finished sample 7 → 12'},
   {d:'2026-10-16', t:'Expiry — XME, TAL, SNOW', w:'3 trades'},
   {d:'2026-10-27', t:'Whirlpool Q3 2026 earnings', w:'WHR'},
   {d:'2026-11-02', t:'Navitas Q3 2026 earnings', w:'NVTS'},
   {d:'2026-11-03', t:'Zoetis Q3 2026 earnings', w:'ZTS'},
-  {d:'2026-11-05', t:'B2Gold Q3 2026 earnings', w:'BTG'},
-  {d:'2026-11-05', t:'Expedia Q3 2026 earnings', w:'EXPE'},
+  {d:'2026-11-05', t:'Q3 earnings — Moderna, B2Gold, Expedia', w:'MRNA, BTG, EXPE'},
+  {d:'2026-11-12', t:'Moderna Investor Day 2026', w:'MRNA'},
   {d:'2026-11-20', t:'Expiry — DJT, BTG, XLI', w:'3 trades'},
   {d:'2026-12-18', t:'Expiry — KRMN', w:'1 trade'},
-  {d:'2027-03-19', t:'Expiry — ZTS', w:'1 trade'}
+  {d:'2027-01-15', t:'Expiry — EQPT, NVTS, WHR, EXPE', w:'incl. the flagged trade'},
+  {d:'2027-03-19', t:'Expiry — ZTS, MRNA', w:'2 trades'}
 ];
 
 const fmt = n => n == null ? '—' : n.toFixed(2);
