@@ -1064,7 +1064,7 @@ function render() {
       + '<td class="num ' + cls + '">' + (t.mv == null ? '—' : pct(t.mv)) + '</td>'
       + '<td><div class="bar' + (t.pg != null && t.pg < 0 ? ' neg' : '') + '"><i style="width:' + clamp + '%"></i></div>'
       + '<div class="meta">' + (t.pg == null ? '—' : Math.round(t.pg) + '% · tgt ' + fmt(t.target)) + '</div></td>'
-      + '<td class="num">' + t.exp.slice(5) + '<div class="meta">' + (t.dte < 0 ? 'expired' : t.dte + 'd') + '</div></td>'
+      + '<td class="num">' + t.exp.slice(5) + '<div class="meta">' + (isNaN(t.dte) ? 'no expiry given' : t.dte < 0 ? 'expired' : t.dte + 'd') + '</div></td>'
       + '<td class="num">' + t.prem + '</td>'
       + '</tr>';
   }).join('');
